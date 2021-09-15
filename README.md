@@ -6,4 +6,4 @@ So far we have implemented the following algorithms:
 3. Counting Inversions
 
 
-This is an ongoing project and more algorithms will be add subsequently.
+This is an ongoing project and more algorithms will be add subsequently. Please visit it again!
