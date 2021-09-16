@@ -1,3 +1,4 @@
 *.log
 .idea/
 *.orig
+.ipynb_checkpoints/
