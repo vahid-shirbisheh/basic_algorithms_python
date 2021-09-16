@@ -4,6 +4,7 @@ So far we have implemented the following algorithms:
 1. Merge Sort
 2. Karatsuba Multiplication 
 3. Counting Inversions
+4. The Strassen Matrix Multiplication (in Jupyter Notebook)
 
 
-This is an ongoing project and more algorithms will be add subsequently. Please visit it again!
+This is an ongoing project and more algorithms will be add subsequently. Please visit This repo. again!
