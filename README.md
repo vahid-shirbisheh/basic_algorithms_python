@@ -6,5 +6,4 @@ So far we have implemented the following algorithms:
 3. Counting Inversions
 4. The Strassen Matrix Multiplication (in Jupyter Notebook)
 
-
-This is an ongoing project and more algorithms will be add subsequently. Please visit this repo. again!
+This is an ongoing project and more algorithms will be add subsequently. Please visit this repo again!
