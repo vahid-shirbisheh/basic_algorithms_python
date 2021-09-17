@@ -2,3 +2,4 @@
 .idea/
 *.orig
 .ipynb_checkpoints/
+test/
