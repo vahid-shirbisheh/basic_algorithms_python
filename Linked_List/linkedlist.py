@@ -21,7 +21,7 @@ We are going to add a number of methods, listed below, to our class to enhance o
 ♥   set(index, value) sets the value in the node at the index
 ♥   slice(start, end=-1)   returns a slice of the linkedlist according to 
 ♥   pos(value) returns the index of the first value in the linkedlist equal to x, otherwise returns False
-♥   
+♥   __add__ overloading + operator for linkedlists
 ♥   
 """
 
@@ -34,7 +34,10 @@ class LinkedList:
             pass
         elif len(args) == 1:
             if type(args[0]) != list:  # one argument and it is not a list
-                args_list = list([args0])
+                if type(args[0]) == range:
+                    args_list = list(args[0])
+                else:
+                    args_list = list([args[0]])
             else:  # one argument and it is a list
                 args_list = args[0]
         else:
@@ -189,8 +192,60 @@ class LinkedList:
         temp.next = None
         return temp
 
-    def slice(self, start, end=-1):
-        if end < 0:
-            end += self.length
-        if start > end or start > self.length:
+    def get(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        temp = self.head
+        for _ in range(index):
+            temp = temp.next
+        return temp.value
+
+    def set(self, index, value):
+        if index < 0 or index >= self.length:
             return False
+        temp = self.head
+        for _ in range(index):
+            temp = temp.next
+        temp.value = value
+        return True
+
+    def slice(self, start, end=0):
+        while end <= 0:
+            end += self.length
+        while start < 0:
+            start += self.length
+        if end > self.length:
+            end = self.length
+        if start > end or start > self.length:
+            return None
+        temp = LinkedList()
+        for index in range(start, end):
+            temp.append(self.get(index))
+        return temp
+
+    def pos(self, value):
+        if self.length == 0:
+            return False
+        i = False
+        temp = self.head
+        for j in range(self.length):
+            if value == temp.value:
+                i = j
+                break
+            temp = temp.next
+        return i
+
+    def __add__(self, other):
+        if other.length == 0:
+            return self
+        if self.length == 0:
+            return other
+        temp1 = self.slice(0)
+        temp2 = other.head
+        while temp2:
+            temp1.tail.next = temp2
+            temp1.tail = temp2
+            temp1.length += 1
+            temp2 = temp2.next
+        temp1.tail.next = temp2
+        return temp1

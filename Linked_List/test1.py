@@ -1,11 +1,18 @@
 from linkedlist import LinkedList
+print("*** various inputs in LinkedList constructor: ***")
+print(LinkedList(2, 3, 4))
+print(LinkedList(range(12)))
+print(LinkedList(["gold", 'silver', "diamond"]))
+print(LinkedList(2))
 
+print("*** empty linkedlists: ***")
 ll_none = LinkedList(None)
 ll_empty = LinkedList()
 ll_bracket = LinkedList([])
 print("ll_bracket", ll_bracket)
 print("ll_none", ll_none)
 print("ll_empty", ll_empty)
+
 print("*** Equality of empty linkedlists: ***")
 print("ll_bracket == ll_none", ll_bracket == ll_none)
 print("ll_bracket == ll_empty", ll_bracket == ll_empty)
