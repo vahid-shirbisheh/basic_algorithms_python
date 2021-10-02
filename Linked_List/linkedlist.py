@@ -5,25 +5,22 @@ class Node:
 
 
 """
-In the following we construct a class for LinkedList with a initializer (constructor) 
+In the following, we construct a class for LinkedList with an initializer (constructor) 
 that accepts various types of arguments such as None, empty (no argument), lists, tuples, etc. 
 We are going to add a number of methods, listed below, to our class to enhance our further experiences:
-♥   __eq__   to define when two linkedlists are equal (==)
-♥   __str__  to return a string representation of the linkedlist (equivalent of toString() method in Java classes)
+♥   __eq__   defines when two linkedlists are equal (==)
+♥   __str__  returns a string representation of the linkedlist (equivalent of toString() method in Java classes)
 ♥   append(x)
 ♥   pop()
-♥   prepend()
-♥   popFirst(value)
+♥   prepend(value)
+♥   popFirst()
+♥   toList() returns a list made up by values of the linkedlist
+♥   insert(index, value) inserts a node with this value at the index
+♥   remove(index) removes the node at the mentioned index
+♥   get(index) gets the value of the node at the index
+♥   set(index, value) sets the value in the node at the index
 ♥   slice(start, end=-1)   returns a slice of the linkedlist according to 
 ♥   pos(value) returns the index of the first value in the linkedlist equal to x, otherwise returns False
-♥   insert(value, index) inserts the value in the index
-♥   remove(index)
-♥   toList() returns a list made up by values of the linkedlist
-♥   
-♥   
-♥   
-♥   
-♥   
 ♥   
 ♥   
 """
@@ -107,6 +104,7 @@ class LinkedList:
             self.tail.next = new_node
             self.tail = new_node
         self.length += 1
+        return True
 
     def pop(self):
         if self.length == 0:
@@ -124,6 +122,27 @@ class LinkedList:
             self.tail = None
         return temp1
 
+    def prepend(self, value):
+        new_node = Node(value)
+        if self.length == 0:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            new_node.next = self.head
+            self.head = new_node
+        self.length += 1
+        return True
+
+    def popFirst(self):
+        if self.length == 0:
+            return None
+        temp = self.head
+        self.head = temp.next
+        self.length -= 1
+        if self.length == 0:
+            self.tail = None
+        return temp
+
     def toList(self):
         temp = []
         if self.length == 0:
@@ -135,3 +154,43 @@ class LinkedList:
                 element = element.next
                 temp.append(element.value)
             return temp
+
+    def insert(self, index, value):
+        if index < 0 or index > self.length:
+            return False
+        if index == 0:
+            return self.prepend(value)
+        if index == self.length:
+            return self.append(value)
+        temp = self.head
+        for _ in range(index - 1):
+            temp = temp.next
+        after = temp.next
+        new_node = Node(value)
+        temp.next = new_node
+        new_node.next = after
+        self.length += 1
+        return True
+
+    def remove(self, index):
+        if index < 0 or index >= self.length:
+            return None
+        if index == 0:
+            return self.popFirst()
+        if index == self.length - 1:
+            return self.pop()
+        before = self.head
+        for _ in range(index - 1):
+            before = before.next
+        temp = before.next
+        after = temp.next
+        before.next = after
+        self.length -= 1
+        temp.next = None
+        return temp
+
+    def slice(self, start, end=-1):
+        if end < 0:
+            end += self.length
+        if start > end or start > self.length:
+            return False
