@@ -7,7 +7,8 @@ So far we have implemented the following algorithms:
 4. The Strassen Matrix Multiplication (in Jupyter Notebook)
 5. Closest Pair (in Jupyter Notebook)
 6. Quick Sort
-7. ...
+7. i_th smallest element of a list of numbers (using random pivots)
+8. ...
 
 We also implement some wellknown data structures in Python in the form of classes, such as
 1. Linkedlists

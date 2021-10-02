@@ -14,7 +14,6 @@ for i in range(length):
 
 # test_list = [12, 1, 8, 3, 2, 11, 7, 14, 19, 14]
 
-
 # To count the number of swaps applied during the program
 num_swap = 0
 # To keep track of pivots chosen during the program
@@ -68,7 +67,6 @@ def quick_sort(my_list, start, end):
 
     my_list = my_list[:start] + my_list[start + k + 1:start + k + i + 1] + my_list[start:start + k + 1] + \
               my_list[start + k + i + 1:]
-
 
     # The left recursive call
     if i >= 0:
