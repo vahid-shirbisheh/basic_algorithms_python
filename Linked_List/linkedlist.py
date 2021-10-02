@@ -22,7 +22,7 @@ We are going to add a number of methods, listed below, to our class to enhance o
 ♥   slice(start, end=-1)   returns a slice of the linkedlist according to 
 ♥   pos(value) returns the index of the first value in the linkedlist equal to x, otherwise returns False
 ♥   __add__ overloading + operator for linkedlists
-♥   
+♥   reverse() reverses the order of the linkedlist
 """
 
 
@@ -249,3 +249,13 @@ class LinkedList:
             temp2 = temp2.next
         temp1.tail.next = temp2
         return temp1
+
+    def reverse(self):
+        if self.length == 0:
+            return self
+        temp0 = self.head
+        temp = LinkedList()
+        for _ in range(self.length):
+            temp.prepend(temp0.value)
+            temp0 = temp0.next
+        return temp
