@@ -223,7 +223,7 @@ class LinkedList:
             temp.append(self.get(index))
         return temp
 
-    def pos(self, value):
+    def index(self, value):
         if self.length == 0:
             return False
         i = False
