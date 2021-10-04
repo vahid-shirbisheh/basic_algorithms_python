@@ -8,7 +8,8 @@ So far we have implemented the following algorithms:
 5. Closest Pair (in Jupyter Notebook)
 6. Quick Sort
 7. i_th smallest element of a list of numbers (using random pivots)
-8. ...
+8. i_th smallest element of a list of numbers (using deterministic pivots)
+9. ...
 
 We also implement some wellknown data structures in Python in the form of classes, such as
 1. Linkedlists
