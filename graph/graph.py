@@ -10,15 +10,16 @@ The methods we have already implemented are as follows:
 ♥   "__init__()" It initializes an empty graph.
 ♥   "add_vertex(vertex)"
 ♥   "add_edge(x, y)"
-♥   "from_edge_list(edge_list)" It builds a graph using the list of edges of a graph by adding 
-    appropriate vertices and edges to an empty graph.
+♥   "from_edge_list(edge_list)" It builds a graph (or expands a non-empty graph) using the list of edges of a graph 
+    by adding appropriate vertices and edges to the empty graph (or in the case of expanding to the non-empty graph).
 ♥   "get_edge_list()" returns the list of all edges of the graph used to call this method.
 ♥   "__eq__(self, other)" overloads the == operator. In other words it defines the equality of two graphs.
 ♥   "__add__(self, other)" overloading the + operator. In fact this function merges two graphs. 
     That is it does not repeat the common vertices and edges. 
 ♥   "plot_connections()" It plots the graph object using functions and methods of networkx and matplotlib.
     It does not draw the parallel edges and loops!
-♥   
+♥   "remove_edge(x, y)" removes the edge xy if it exists
+♥   "remove_vertex(x)" If x is a vertex of the graph, this method removes all edges incident to x and then removes x.
 ♥   
 ♥   
 ♥   
@@ -59,7 +60,8 @@ class Graph:
                 self.adj_list[y] = []
             # adding the edges
             self.adj_list[x].append(y)
-            self.adj_list[y].append(x)
+            if x != y:
+                self.adj_list[y].append(x)
 
     def get_edge_list(self):
         temp = []
@@ -89,6 +91,25 @@ class Graph:
         gr.add_edges_from(self.get_edge_list())
         nx.draw_networkx(gr)
         plt.show()
+
+    def remove_edge(self, x, y):
+        if x == y and x in self.adj_list.keys():  # to take care of loops
+            self.adj_list[x].remove(y)
+            return True
+        if x in self.adj_list.keys() and y in self.adj_list.keys():
+            self.adj_list[x].remove(y)
+            self.adj_list[y].remove(x)
+            return True
+        return False
+
+    def remove_vertex(self, vertex):
+        if vertex in self.adj_list.keys():
+            for tail in self.adj_list[vertex]:  # This deletes all edges incident to the vertex
+                while vertex in self.adj_list[tail]:  # This takes care of possibly parallel edges
+                    self.adj_list[tail].remove(vertex)
+            del self.adj_list[vertex]  # This deletes the vertex
+            return True
+        return False
 
 
 def merge(list1, list2):
