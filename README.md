@@ -10,10 +10,11 @@ So far we have implemented the following algorithms:
 7. i_th smallest element of a list of numbers (using random pivots)
 8. i_th smallest element of a list of numbers (using deterministic pivots)
 9. ...
-
+## Data Structures
 We also implement some wellknown data structures in Python in the form of classes, such as
 1. Linkedlists
 2. Graphs
-3. ...
+3. Stack
+4. ...
 
 This is an ongoing project and more algorithms will be add subsequently. Please visit this repo again!
