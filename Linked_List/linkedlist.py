@@ -63,6 +63,11 @@ class LinkedList:
             self.tail = node_temp
 
     def __eq__(self, other):
+        """
+        Since we are going to use this method for testing the functionality of other methods,
+        we do not assume all objects were constructed correctly. So, we intentionally double check
+        the validity of construction of objects.
+        """
         if self.length != other.length:
             return False
         else:
