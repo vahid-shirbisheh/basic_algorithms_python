@@ -2,6 +2,11 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from collections import Counter
 
+import sys
+sys.path.append('C:\\Users\\acer\\basic_algorithms_python\\queue')  # use the address of graph class in your PC
+from queue import Queue
+
+
 """
 In this class, we implement basic operation of graphs as a data structure. 
 We also add several other methods useful for working with graphs.
@@ -34,6 +39,9 @@ in order to check their equality, we have used Counter() function from Collectio
 class Graph:
     def __init__(self):
         self.adj_list = {}
+
+    def __str__(self):
+        return str(self.adj_list)
 
     def add_vertex(self, vertex):
         if vertex not in self.adj_list.keys():
@@ -111,9 +119,142 @@ class Graph:
             return True
         return False
 
+    def BFS_layers(self, vertex):
+        # edges = self.get_edge_list()
+        n = len(self.adj_list.keys())
+        # m = len(edges)
+        layers = [[vertex]]
+        explored = [vertex]
+        exploredq = Queue(vertex)
+        current_layer = 0
+        while len(explored) < n:
+            new_layer = []
+            for _ in range(len(layers[current_layer])):
+                v = exploredq.dequeue()
+                if v:
+                    v_incidents = self.adj_list[v.value]
+                    for other_vertex in v_incidents:
+                        if other_vertex not in explored:
+                            explored.append(other_vertex)
+                            new_layer.append(other_vertex)
+                            exploredq.enqueue(other_vertex)
+            layers.append(new_layer)
+            current_layer += 1
+        return [layer for layer in layers if len(layer) > 0]
+
 
 def merge(list1, list2):
     temp1 = list1[:]
     temp2 = [x for x in list2 if x not in list1]
     temp1.extend(temp2)
     return temp1
+
+
+"""
+Here we build queue class independent of linkedlist class.
+"""
+
+
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+
+class Queue:
+    def __init__(self, *args):
+        # Unifying all variety of input arguments as lists
+        args_list = []
+        if len(args) == 0 or args[0] is None:  # no argument or None as the argument
+            pass
+        elif len(args) == 1:
+            if type(args[0]) != list:  # one argument and it is not a list
+                if type(args[0]) == range:
+                    args_list = list(args[0])
+                else:
+                    args_list = list([args[0]])
+            else:  # one argument and it is a list
+                args_list = args[0]
+        else:
+            args_list = list(args)  # several arguments and they are list or not-list
+
+        self.length = len(args_list)  # Setting the length of the queue object
+
+        # constructing a queue according to the length of args_list
+        if len(args_list) == 0:  # zero-length or empty queue
+            self.first = None
+            self.last = None
+        elif len(args_list) == 1:  # queue with one element
+            new_node = Node(args_list[0])
+            self.first = new_node
+            self.last = new_node
+        else:  # queue with multiple elements
+            node_temp = Node(args_list[0])
+            self.first = node_temp
+            for i in range(1, len(args_list)):
+                new_node = node_temp
+                node_temp = Node(args_list[i])
+                new_node.next = node_temp
+            self.last = node_temp
+
+    def __eq__(self, other):
+        """
+        Since we are going to use this method for testing the functionality of other methods,
+        we do not assume all objects were constructed correctly. So, we intentionally double check
+        the validity of construction of objects.
+        """
+        if self.length != other.length:
+            return False
+        else:
+            if self.length == 0:
+                return self.first is None and other.first is None
+            elif self.length == 1:
+                return self.first.value == other.first.value and self.last.value == other.last.value
+            else:
+                temp1 = self.first
+                temp2 = other.first
+                while temp1:
+                    if not (temp1.value == temp2.value):
+                        return False
+                    temp1 = temp1.next
+                    temp2 = temp2.next
+                return True
+
+    def __str__(self):
+        temp_string = "(first)"
+        temp = self.first
+        while True:
+            if temp:
+                temp_string = temp_string + str(temp.value)
+            else:
+                temp_string = temp_string + str(temp)
+            if temp == self.last:
+                temp_string = temp_string + "(last)"
+                break
+            else:
+                temp_string = temp_string + " -> "
+            temp = temp.next
+        if self.length > 0:
+            temp_string = temp_string + " -> None"
+        return temp_string
+
+    def enqueue(self, value):
+        new_node = Node(value)
+        if self.length == 0:
+            self.first = new_node
+            self.last = new_node
+        else:
+            self.last.next = new_node
+            self.last = new_node
+        self.length += 1
+        return True
+
+    def dequeue(self):
+        if self.length == 0:
+            return None
+        temp = self.first
+        self.first = temp.next
+        self.length -= 1
+        if self.length == 0:
+            self.last = None
+        return temp
