@@ -16,7 +16,7 @@ We also implement some wellknown data structures in Python in the form of classe
 2. Graphs
 3. Stack
 4. Queue (without using linkedlists)
-5. Queuell  (queues without using linkedlists) 
+5. Queuell  (queues using linkedlists) 
 6. ...
 
 This is an ongoing project and more algorithms will be add subsequently. Please visit this repo again!
