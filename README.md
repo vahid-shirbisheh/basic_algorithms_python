@@ -9,7 +9,8 @@ So far we have implemented the following algorithms:
 6. Quick Sort
 7. i_th smallest element of a list of numbers (using random pivots)
 8. i_th smallest element of a list of numbers (using deterministic pivots)
-9. ...
+9. The distance between vertices of a graph using Breadth-First Search strategy
+10. ...
 ## Data Structures
 We also implement some wellknown data structures in Python in the form of classes, such as
 1. Linkedlists
