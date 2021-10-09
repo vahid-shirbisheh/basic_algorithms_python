@@ -14,5 +14,6 @@ print(g)
 print("The list of layers around X: ", g.BFS_layers("X"))
 print("The list of layers around Z: ", g.BFS_layers("Z"))
 print("The list of layers around A: ", g.BFS_layers("A"))
+print("The list of layers around H: ", g.BFS_layers("H"))
 
 g.plot_connections()
