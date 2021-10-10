@@ -142,7 +142,7 @@ class Graph:
             for _ in range(len(layers[current_layer])):
                 v = exploredq.dequeue()
                 if v:
-                    v_incidents = self.adj_list[v.value]
+                    v_incidents = self.adj_list[v]
                     for other_vertex in v_incidents:
                         if other_vertex not in explored:
                             explored.append(other_vertex)
@@ -154,17 +154,24 @@ class Graph:
 
     def connected_components(self):
         components = []
-        n = len(self)
-        v0 = self.adj_list.keys[0]
-        explored = [v0]
-        exploredq = Queue(v0)
-        while len(explored) < n:
-            new_component = Graph()
-
+        explored = []
+        for vertex in self.adj_list.keys():
+            if vertex not in explored:
+                explored.append(vertex)
+                current_queue = Queue(vertex)
+                new_component = Graph()
+                new_component.add_vertex(vertex)
+                new_component.adj_list[vertex] = self.adj_list[vertex]
+                while current_queue.length > 0:
+                    vertex = current_queue.dequeue()
+                    for other_vertex in self.adj_list[vertex]:
+                        if other_vertex not in explored:
+                            explored.append(other_vertex)
+                            current_queue.enqueue(other_vertex)
+                            new_component.add_vertex(other_vertex)
+                            new_component.adj_list[other_vertex] = self.adj_list[other_vertex]
+                components.append(new_component)
         return components
-
-
-
 
 
 def merge_lists(list1, list2):
@@ -180,6 +187,7 @@ def merge_dicts(dict1, dict2):
         if d not in temp:
             temp[d] = dict2[d]
     return temp
+
 
 """
 Here we build queue class independent of linkedlist class.
@@ -288,4 +296,4 @@ class Queue:
         self.length -= 1
         if self.length == 0:
             self.last = None
-        return temp
+        return temp.value
