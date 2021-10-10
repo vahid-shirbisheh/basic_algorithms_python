@@ -91,6 +91,15 @@ class Graph:
         return temp
 
     def __add__(self, other):
+        temp = self.__copy__()
+        for vertex in other.adj_list.keys():
+            if vertex in temp.adj_list.keys():
+                temp.adj_list[vertex] = merge_lists(temp.adj_list[vertex], other.adj_list[vertex])
+            else:
+                temp.adj_list[vertex] = other.adj_list[vertex]
+        return temp
+
+    def add_disconnected_graph(self, other):
         temp = Graph()
         temp.adj_list = merge_dicts(self.adj_list, other.adj_list)
         return temp
