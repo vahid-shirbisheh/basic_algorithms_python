@@ -2,10 +2,6 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from collections import Counter
 
-import sys
-sys.path.append('C:\\Users\\acer\\basic_algorithms_python\\queue')  # use the address of graph class in your PC
-from queue import Queue
-
 
 """
 In this class, we implement basic operation of graphs as a data structure. 
@@ -89,9 +85,14 @@ class Graph:
                     return False
         return True
 
+    def __copy__(self):
+        temp = Graph()
+        temp.adj_list = self.adj_list.copy()
+        return temp
+
     def __add__(self, other):
         temp = Graph()
-        temp.from_edge_list(merge(self.get_edge_list(), other.get_edge_list()))
+        temp.adj_list = merge_dicts(self.adj_list, other.adj_list)
         return temp
 
     def plot_connections(self):  # does not plot loops and parallel edges
@@ -119,10 +120,10 @@ class Graph:
             return True
         return False
 
+    # noinspection SpellCheckingInspection
     def BFS_layers(self, vertex):
-        # edges = self.get_edge_list()
+        # In this method the graph is assumed to be connected.
         n = len(self.adj_list.keys())
-        # m = len(edges)
         layers = [[vertex]]
         explored = [vertex]
         exploredq = Queue(vertex)
@@ -142,13 +143,34 @@ class Graph:
             current_layer += 1
         return [layer for layer in layers if len(layer) > 0]
 
+    def connected_components(self):
+        components = []
+        n = len(self)
+        v0 = self.adj_list.keys[0]
+        explored = [v0]
+        exploredq = Queue(v0)
+        while len(explored) < n:
+            new_component = Graph()
 
-def merge(list1, list2):
+        return components
+
+
+
+
+
+def merge_lists(list1, list2):
     temp1 = list1[:]
     temp2 = [x for x in list2 if x not in list1]
     temp1.extend(temp2)
     return temp1
 
+
+def merge_dicts(dict1, dict2):
+    temp = dict1.copy()
+    for d in dict2:
+        if d not in temp:
+            temp[d] = dict2[d]
+    return temp
 
 """
 Here we build queue class independent of linkedlist class.
