@@ -49,4 +49,5 @@ class Queuell:
             self.first = self.body.head
             if self.length == 0:
                 self.last = self.body.tail  # which is equal to None
+            temp = temp.value
         return temp

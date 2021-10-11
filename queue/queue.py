@@ -105,4 +105,4 @@ class Queue:
         self.length -= 1
         if self.length == 0:
             self.last = None
-        return temp
+        return temp.value
