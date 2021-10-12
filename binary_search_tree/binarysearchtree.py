@@ -22,7 +22,7 @@ class BinarySearchTree:
             return False
         self.size += 1
         new_node = Node(value)
-        if self.size == 0:
+        if self.size == 1:
             self.root = new_node
             self.height += 1
             return True
@@ -48,4 +48,20 @@ class BinarySearchTree:
         else:
             temp_2.left = new_node
         self.height = max(temp_height, self.height)
+        return True
+
+    def contains(self, item):
+        temp = self.root
+        while temp:
+            if item > temp.value:
+                temp = temp.right
+            elif item < temp.value:
+                temp = temp.left
+            else:
+                return True
+        return False
+
+    def fromList(self, my_list):
+        for item in my_list:
+            self.insert(item)
         return True
