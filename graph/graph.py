@@ -3,36 +3,42 @@ import matplotlib.pyplot as plt
 from collections import Counter
 
 
-"""
-In this class, we implement basic operation of graphs as a data structure. 
-We also add several other methods useful for working with graphs.
-We use networkx package to visualize graphs and demonstrate our constructions.
-The methods we have already implemented are as follows:
-♥   "__init__()" It initializes an empty graph.
-♥   "add_vertex(vertex)"
-♥   "add_edge(x, y)"
-♥   "from_edge_list(edge_list)" It builds a graph (or expands a non-empty graph) using the list of edges of a graph 
-    by adding appropriate vertices and edges to the empty graph (or in the case of expanding to the non-empty graph).
-♥   "get_edge_list()" returns the list of all edges of the graph used to call this method.
-♥   "__eq__(self, other)" overloads the == operator. In other words it defines the equality of two graphs.
-♥   "__add__(self, other)" overloading the + operator. In fact this function merges two graphs. 
-    That is it does not repeat the common vertices and edges. 
-♥   "plot_connections()" It plots the graph object using functions and methods of networkx and matplotlib.
-    It does not draw the parallel edges and loops!
-♥   "remove_edge(x, y)" removes the edge xy if it exists
-♥   "remove_vertex(x)" If x is a vertex of the graph, this method removes all edges incident to x and then removes x.
-♥   
-♥   
-♥   
-
-Dependencies:
-Besides matplotlib.plot and networkx we have sed the following functions:
-The function merge is a little function that we use to merge two graphs. To compare the lists of edges of two graphs 
-in order to check their equality, we have used Counter() function from Collections.    
-"""
-
-
 class Graph:
+    """
+    In this class, we implement basic operation of graphs as a data structure.
+    We also add several other methods useful for working with graphs.
+    We allow multi edges between two vertices and loops.
+    We use networkx package to visualize graphs and demonstrate our constructions.
+    The methods we have already implemented are as follows:
+    ♥   "__init__()" It initializes an empty graph.
+    ♥   "add_vertex(vertex)"
+    ♥   "__copy__()" It make a copy of the graph
+    ♥   "add_edge(x, y)"
+    ♥   "from_edge_list(edge_list)" It builds a graph (or expands a non-empty graph) using the list of edges of a graph
+         by adding appropriate vertices and edges to the empty graph (or to the non-empty graph).
+    ♥   "get_edge_list()" returns the list of all edges of the graph used to call this method.
+    ♥   "__eq__(self, other)" overloads the == operator. In other words it defines the equality of two graphs.
+    ♥   "__add__(self, other)" overloading the + operator. In fact this function merges two graphs.
+         That is it does not repeat the common vertices and edges.
+    ♥   "plot_connections()" It plots the graph object using functions and methods of networkx and matplotlib.
+         It does not draw the parallel edges and loops!
+    ♥   "remove_edge(x, y)" removes the edge xy if it exists
+    ♥   "remove_vertex(x)" If x is a vertex, this method removes all edges incident to x and then removes x.
+    ♥   "add_disconnected_graph(other)" adds two disconnected (with no common vertex) graphs.
+         This method is faster and more straightforward that __add__ method.
+    ♥   "BFS_layers(vertex)" It returns a list of the list of vertices ordered by layers coming from
+         the Breadth-First Search strategy. It can be used in a connected graph to compute the distance of two vertices
+         in linear time with respect to the number of vertices and edges.
+    ♥   "connected_components()" This method returns a list of connected graphs.
+    ♥
+
+    Dependencies:
+    Besides matplotlib.plot and networkx we have used the following functions:
+    - The function merge_lists is a little function that we use to merge two graphs.
+    - To compare the lists of edges of two graphs in order to check their equality,
+    we have used Counter() function from Collections.
+    """
+
     def __init__(self):
         self.adj_list = {}
 
