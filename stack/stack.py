@@ -100,11 +100,10 @@ class Stack:
     def __str__(self):
         temp_string = "(top)"
         temp = self.top
+        if temp is None:
+            temp_string = temp_string + str(temp)
         while temp:
-            if temp:
-                temp_string = temp_string + str(temp.value)
-            else:
-                temp_string = temp_string + str(temp)
+            temp_string = temp_string + str(temp.value)
             temp_string = temp_string + " -> "
             temp = temp.down
         if self.height > 0:

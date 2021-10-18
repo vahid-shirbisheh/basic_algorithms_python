@@ -11,7 +11,8 @@ So far we have implemented the following algorithms:
 8. i_th smallest element of a list of numbers (using deterministic pivots)
 9. The distance between vertices of a graph using Breadth-First Search strategy
 10. The Distances between vertices of a (possibly disconnected) graph, again using Breadth-First Search strategy
-11. ...
+11. The depth First Strategy for implementing graph algorithms
+12. ...
 ## Data Structures
 We also implement some wellknown data structures in Python in the form of classes, such as
 1. Linkedlists

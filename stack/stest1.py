@@ -1,7 +1,4 @@
 from stack import Stack
-import sys
-sys.path.append('C:\\Users\\acer\\basic_algorithms_python\\linked_list')
-from linkedlist import LinkedList
 
 
 """

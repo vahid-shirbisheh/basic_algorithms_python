@@ -196,7 +196,7 @@ def merge_dicts(dict1, dict2):
 
 
 """
-Here we build queue class independent of linkedlist class.
+Here we build queue class to use in Breadth-First Search.
 """
 
 
