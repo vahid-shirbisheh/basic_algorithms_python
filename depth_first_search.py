@@ -6,6 +6,11 @@ from graph import Graph
 from stack import Stack
 
 
+"""
+Here, we implement a Depth-First Search algorithm for undirected graphs.
+"""
+
+
 def dfs(graph, vertex):
     def next(v):
         temp = None
@@ -18,10 +23,10 @@ def dfs(graph, vertex):
     visited_stack = Stack(vertex)
     current_vertex = vertex
     backward = False
-    i = 0
+    i = 0  # Just to track the order of discovering new vertices
     while visited_stack.height > 0:
         i += 1
-        print(i, "  Stack = ", visited_stack)
+        print(i, "  Stack = ", visited_stack)  # Just to track the order of discovering new vertices
         if backward:
             current_vertex = visited_stack.pop()
         next_vertex = next(current_vertex)
@@ -34,10 +39,6 @@ def dfs(graph, vertex):
             visited_list.append(next_vertex)
         else:
             backward = True
-
-        # print("Visited = ", visited_list)
-        # print(visited_stack)
-    print("Stack = ", visited_stack)
     return visited_list
 
 
@@ -47,6 +48,7 @@ g.from_edge_list([['A', 'B'], ['B', 'C'], ['C', 'D'], ['D', 'A'], ['B', 'E'], ['
                   ['P', 'Q'], ['Q', 'M'], ['M', 'N'], ['N', 'Q'], ['P', 'E'],
                   ['H', 'M']])
 
+# Another example
 """
 g.from_edge_list([['F', 'E'], ['F', 'A'], ['A', 'B'], ['A', 'C'], ['A', 'D'], ['X', 'E'], ['Z', 'E'], ['Y', 'E']])
 """
