@@ -30,7 +30,7 @@ class Graph:
          the Breadth-First Search strategy. It can be used in a connected graph to compute the distance of two vertices
          in linear time with respect to the number of vertices and edges.
     ♥   "connected_components()" This method returns a list of connected graphs.
-    ♥
+    ♥   "remove_loops()" This method removes all loops and returns the resulting graph.
 
     Dependencies:
     Besides matplotlib.plot and networkx we have used the following functions:
@@ -126,6 +126,16 @@ class Graph:
             return True
         return False
 
+    def remove_loops(self):
+        """
+        Since we allowed loops and loops make problems for Breath-First Search algorithm, we define this method to
+        get id of all loops in a graph before applying the BFS.
+        """
+        g = self.__copy__()
+        for x in self.adj_list.keys():
+            g.adj_list[x] = removeAll(g.adj_list[x], x)
+        return g
+
     def remove_vertex(self, vertex):
         if vertex in self.adj_list.keys():
             for tail in self.adj_list[vertex]:  # This deletes all edges incident to the vertex
@@ -192,6 +202,14 @@ def merge_dicts(dict1, dict2):
     for d in dict2:
         if d not in temp:
             temp[d] = dict2[d]
+    return temp
+
+
+def removeAll(my_list, elt):
+    temp = []
+    for x in my_list:
+        if x != elt:
+            temp.append(x)
     return temp
 
 
