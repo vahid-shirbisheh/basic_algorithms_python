@@ -128,8 +128,8 @@ class Graph:
 
     def remove_loops(self):
         """
-        Since we allowed loops and loops make problems for Breath-First Search algorithm, we define this method to
-        get id of all loops in a graph before applying the BFS.
+        Since we allowed loops and loops make problems for certain algorithms, we define this method to
+        get id of all loops in a graph before applying those algorithms.
         """
         g = self.__copy__()
         for x in self.adj_list.keys():
