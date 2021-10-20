@@ -43,15 +43,18 @@ def dfs(graph, vertex):
 
 
 g = Graph()
+"""
 g.from_edge_list([['A', 'B'], ['B', 'C'], ['C', 'D'], ['D', 'A'], ['B', 'E'], ['E', 'Y'],
                   ['X', 'Y'], ['Y', 'Z'], ['X', 'Z'],
                   ['P', 'Q'], ['Q', 'M'], ['M', 'N'], ['N', 'Q'], ['P', 'E'],
                   ['H', 'M']])
 
-# Another example
 """
-g.from_edge_list([['F', 'E'], ['F', 'A'], ['A', 'B'], ['A', 'C'], ['A', 'D'], ['X', 'E'], ['Z', 'E'], ['Y', 'E']])
-"""
+# An example with loops.
+# To see loops the presence of loops does not affect the algorithm, one can compare two case in the following example
+# 1. with the last two edges and 2. without them.
+g.from_edge_list([['F', 'E'], ['F', 'A'], ['A', 'B'], ['A', 'C'], ['A', 'D'], ['X', 'E'], ['Z', 'E'],
+                  ['Y', 'E'], ['E', 'E'], ['A', 'A']])
 # print("The graph g as a list of edges:\n", g.get_edge_list(), "\n")
 print("The graph g as a dictionary:\n", g.adj_list, "\n")
 # Testing the depth-first search function
