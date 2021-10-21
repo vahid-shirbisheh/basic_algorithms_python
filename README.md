@@ -15,7 +15,8 @@ So far we have implemented the following algorithms:
 12. The decomposition of an undirected graph into connected components using the Depth First Search strategy
 13. A shortest path between two vertices of an undirected graph using BFS strategy was implements
 14. A simple implementation of grids using the Graph class 
-15. ...
+15. Using graph algorithms (BSF strategy and its consequences) to solve a maze
+16. ...
 ## Data Structures
 We also implement some wellknown data structures in Python in the form of classes, such as
 1. Linkedlists

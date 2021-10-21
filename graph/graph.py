@@ -118,11 +118,14 @@ class Graph:
 
     def remove_edge(self, x, y):
         if x == y and x in self.adj_list.keys():  # to take care of loops
-            self.adj_list[x].remove(y)
+            if y in self.adj_list[x]:
+                self.adj_list[x].remove(y)
             return True
         if x in self.adj_list.keys() and y in self.adj_list.keys():
-            self.adj_list[x].remove(y)
-            self.adj_list[y].remove(x)
+            if y in self.adj_list[x]:
+                self.adj_list[x].remove(y)
+            if x in self.adj_list[y]:
+                self.adj_list[y].remove(x)
             return True
         return False
 
