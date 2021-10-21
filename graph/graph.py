@@ -189,6 +189,34 @@ class Graph:
                 components.append(new_component)
         return components
 
+    def depth_first_search(self, vertex):
+        def next(v):
+            temp = None
+            for x in self.adj_list[v]:
+                if x not in visited_list:
+                    temp = x
+                    break
+            return temp
+        visited_list = [vertex]
+        visited_stack = Stack(vertex)
+        current_vertex = vertex
+        backward = False
+        while visited_stack.height > 0:
+            if backward:
+                current_vertex = visited_stack.pop()
+            next_vertex = next(current_vertex)
+            backward = False
+            if next_vertex:
+                if (visited_stack.top and visited_stack.top.value != current_vertex) or (
+                        visited_stack.top is None and next(current_vertex)):
+                    visited_stack.push(current_vertex)
+                current_vertex = next_vertex
+                visited_stack.push(next_vertex)
+                visited_list.append(next_vertex)
+            else:
+                backward = True
+        return visited_list
+
 
 def merge_lists(list1, list2):
     temp1 = list1[:]
@@ -214,7 +242,7 @@ def removeAll(my_list, elt):
 
 
 """
-Here we build queue class to use in Breadth-First Search.
+Here we build minimum versions of queue and stack classes to use in Breadth-First Search and Depth-First Search methods.
 """
 
 
@@ -225,81 +253,17 @@ class Node:
 
 
 class Queue:
-    def __init__(self, *args):
-        # Unifying all variety of input arguments as lists
-        args_list = []
-        if len(args) == 0 or args[0] is None:  # no argument or None as the argument
-            pass
-        elif len(args) == 1:
-            if type(args[0]) != list:  # one argument and it is not a list
-                if type(args[0]) == range:
-                    args_list = list(args[0])
-                else:
-                    args_list = list([args[0]])
-            else:  # one argument and it is a list
-                args_list = args[0]
-        else:
-            args_list = list(args)  # several arguments and they are list or not-list
+    def __init__(self, value=None):
 
-        self.length = len(args_list)  # Setting the length of the queue object
-
-        # constructing a queue according to the length of args_list
-        if len(args_list) == 0:  # zero-length or empty queue
+        if value is None:
             self.first = None
             self.last = None
-        elif len(args_list) == 1:  # queue with one element
-            new_node = Node(args_list[0])
+            self.length = 0
+        else:
+            new_node = Node(value)
             self.first = new_node
             self.last = new_node
-        else:  # queue with multiple elements
-            node_temp = Node(args_list[0])
-            self.first = node_temp
-            for i in range(1, len(args_list)):
-                new_node = node_temp
-                node_temp = Node(args_list[i])
-                new_node.next = node_temp
-            self.last = node_temp
-
-    def __eq__(self, other):
-        """
-        Since we are going to use this method for testing the functionality of other methods,
-        we do not assume all objects were constructed correctly. So, we intentionally double check
-        the validity of construction of objects.
-        """
-        if self.length != other.length:
-            return False
-        else:
-            if self.length == 0:
-                return self.first is None and other.first is None
-            elif self.length == 1:
-                return self.first.value == other.first.value and self.last.value == other.last.value
-            else:
-                temp1 = self.first
-                temp2 = other.first
-                while temp1:
-                    if not (temp1.value == temp2.value):
-                        return False
-                    temp1 = temp1.next
-                    temp2 = temp2.next
-                return True
-
-    def __str__(self):
-        temp_string = "(first)"
-        temp = self.first
-        while True:
-            if temp:
-                temp_string = temp_string + str(temp.value)
-            else:
-                temp_string = temp_string + str(temp)
-            if temp == self.last:
-                temp_string = temp_string + "(last)"
-                break
-            else:
-                temp_string = temp_string + " -> "
-            temp = temp.next
-        if self.length > 0:
-            temp_string = temp_string + " -> None"
-        return temp_string
+            self.length = 1
 
     def enqueue(self, value):
         new_node = Node(value)
@@ -320,4 +284,35 @@ class Queue:
         self.length -= 1
         if self.length == 0:
             self.last = None
+        return temp.value
+
+
+class Stack:
+    def __init__(self, value=None):
+        if value is None:
+            self.top = None
+            self.height = 0
+        else:
+            new_node = Node(value)
+            self.top = new_node
+            self.height = 1
+
+    def push(self, value):
+        new_node = Node(value)
+        if self.height == 0:
+            self.top = new_node
+            self.height += 1
+            return True
+        new_node.next = self.top
+        self.top = new_node
+        self.height += 1
+        return True
+
+    def pop(self):
+        if self.height == 0:
+            return None
+        temp = self.top
+        self.top = self.top.next
+        temp.next = None
+        self.height -= 1
         return temp.value

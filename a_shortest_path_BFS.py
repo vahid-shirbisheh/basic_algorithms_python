@@ -18,11 +18,13 @@ def find_a_shortest_path(graph, v1, v2):
     elif v1 in layers[1]:
         path.append(v2)
         return path
-    n = len(layers)  # so n must be at least 3
+    n = len(layers)  # So, for the rest of the algorithm, n must be at least 3
     for i in range(2, n):
         if v1 in layers[i]:
-            n = i
+            n = i  # This shows that, we do not need to finish BFS, as long as we get to vertex v1 is enough
             break
+
+    i = n
     while i > 1:
         for vertex in graph.adj_list[path[-1]]:
             if vertex in layers[i - 1]:
@@ -34,12 +36,12 @@ def find_a_shortest_path(graph, v1, v2):
 
 
 g = Graph()
-edges = [["A", "B"], ["A", "C"], ["D", "C"], ["B", "E"], ["F", "D"], ["F", "E"], ["G", "F"], ["H", "G"],
+edges = [["A", "B"], ["A", "C"], ["D", "C"], ["B", "E"], ["F", "I"], ["F", "E"], ["G", "F"], ["H", "G"],
          ["H", "D"], ["G", "I"], ["J", "G"], ["K", "J"],  ["K", "L"], ["I", "L"],
          ["L", "M"], ["L", "N"], ["L", "O"], ["O", "R"], ["N", "R"]]
 g.from_edge_list(edges)
 print(g)
-v1 = "A"
+v1 = "D"
 v2 = "R"
 print("The list of layers around X: ", g.BFS_layers(v2))
 

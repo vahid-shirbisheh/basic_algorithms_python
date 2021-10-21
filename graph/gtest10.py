@@ -2,7 +2,7 @@ from graph import Graph
 
 # noinspection SpellCheckingInspection
 """
-To test whether our implementation of BFS works fine with the present of loops.
+To test whether our implementation of BFS works fine with the presence of loops.
 Compare this test with gtest.py
 """
 
