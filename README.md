@@ -12,11 +12,12 @@ So far we have implemented the following algorithms:
 9. The distance between vertices of a graph using Breadth-First Search strategy
 10. The Distances between vertices of a (possibly disconnected) graph, again using Breadth-First Search strategy
 11. The Depth First Search strategy for implementing graph algorithms
-12. The decomposition of an undirected graph into connected components using the Depth First Search strategy
-13. A shortest path between two vertices of an undirected graph using BFS strategy was implements
+12. The decomposition of an undirected graph into connected components using the Depth-First Search strategy
+13. A shortest path between two vertices of an undirected graph using BFS strategy
 14. A simple implementation of grids using the Graph class 
 15. Using graph algorithms (BSF strategy and its consequences) to solve a maze
-16. ...
+16. The bubble sort
+17. ...
 ## Data Structures
 We also implement some wellknown data structures in Python in the form of classes, such as
 1. Linkedlists
