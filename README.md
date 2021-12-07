@@ -1,6 +1,6 @@
 # Basic Computer Sicence Algorithms in Python
 This is a repository for implementations of some basic algorithms using python language.
-So far we have implemented the following algorithms:
+So far, we have implemented the following algorithms:
 1. The merge sort
 2. Karatsuba Multiplication 
 3. Counting Inversions
