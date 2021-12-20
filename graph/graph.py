@@ -52,27 +52,22 @@ class Graph:
         return False
 
     def add_edge(self, x, y):
-        if x == y and x in self.adj_list.keys():  # to take care of loops
-            self.adj_list[x].append(y)
-            return True
-        if x in self.adj_list.keys() and y in self.adj_list.keys():
-            self.adj_list[x].append(y)
-            self.adj_list[y].append(x)
-            return True
-        return False
-
-    def from_edge_list(self, edge_list):
-        for [x, y] in edge_list:
-            # adding the vertices
+        if x == y:  # to take care of loops
+            if x not in self.adj_list.keys():
+                self.adj_list[x] = []
+            self.adj_list[x].append(x)
+        else:  # to add an edge between distinct vertices
             if x not in self.adj_list.keys():
                 self.adj_list[x] = []
             if y not in self.adj_list.keys():
                 self.adj_list[y] = []
-            # adding the edges
             self.adj_list[x].append(y)
-            if x != y:
-                self.adj_list[y].append(x)
+            self.adj_list[y].append(x)
 
+    def from_edge_list(self, edge_list):
+        for (x, y) in edge_list:
+            self.add_edge(x, y)
+            
     def get_edge_list(self):
         temp = []
         previous_vertices = []
